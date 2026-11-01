@@ -6,6 +6,34 @@ into one `.zip`, using the filename encoding you choose.
 It was built for upload portals that garble Scandinavian names (æ, ø, å), but
 it is useful whenever the receiving system expects something other than UTF-8.
 
+## Download
+
+Download the latest `ZipLatin1-<version>.zip` from
+[Releases](https://github.com/Trez-zerT/zip-latin1/releases), unzip it, and move
+`ZipLatin1.app` to `~/Applications` or `/Applications`.
+
+It is a universal build (Apple Silicon and Intel) for macOS 14 or later, and
+needs **Python 3.9+** — either the Xcode Command Line Tools or
+`brew install python3`.
+
+### First launch (Gatekeeper)
+
+The app is ad-hoc signed, not notarized, so macOS blocks the first launch. To
+allow it:
+
+1. Double-click the app and dismiss the warning.
+2. Open **System Settings → Privacy & Security**, scroll to **Security**, and
+   click **Open Anyway** next to ZipLatin1. Authenticate and confirm.
+
+Alternatively, remove the download quarantine flag from Terminal:
+
+```sh
+xattr -dr com.apple.quarantine ~/Applications/ZipLatin1.app
+```
+
+Then open the app normally. On some macOS versions, Control-clicking the app
+and choosing **Open** also works.
+
 ## How it works
 
 1. Open `~/Applications/ZipLatin1.app`.
@@ -47,7 +75,7 @@ Requires the Xcode Command Line Tools (Swift) and Python 3.9+ at runtime.
 
 ```sh
 ./build.sh            # installs to ~/Applications/ZipLatin1.app
-./build.sh /path/to/ZipLatin1.app
+./package.sh          # builds dist/ZipLatin1-<version>.zip (universal)
 ```
 
 The engine can also be used from the terminal:
